@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0%;
+        padding: 0%;
+      }
+      .content {
+        width: 98%;
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 1em;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        box-sizing: border-box;
+      }
+      .warning{
+        width: 98%;
+        border: 2px solid red;
+        border-radius: 6px;
+        padding: 1em;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 30px;
+        box-sizing: border-box;
+      }
+      ul > li {
+        list-style: none;
+      }
+      p {
+        padding-left: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cmd-order" class="content">
+      <ul>
+        <li>
+          <h3>
+            在命令行执行命令，npm install -g nrm，全局安装nrm。执行命令nrm
+            ls查看可选的源。如果要切换到taobao源，执行命令nrm use taobao。
+          </h3>
+        </li>
+        <li>通过-v测试版本号</li>
+        <li>先在根目录创建src文件夹里面有index.html和main.js</li>
+        <li>创建dist文件夹，package.json文件和webpack.config.js文件</li>
+        <li>
+          在cmd中输入npm install --save-dev webpack，npm install --save-dev
+          webpack-cli
+        </li>
+        <li>vuecli后面已经没有webpack.config.js，移到了build的webpack.base.conf.js，</li>
+        <li>
+          注：如果在Terminal中直接运行webpack命令不成功，使用node_modules/.bin/webpack执行
+        </li>
+      </ul>
+    </div>
+    <div id="dev-server" class="content">
+      <ul>
+        <li>
+          <h3>使用 webpack-dev-server 这个工具，来实现自动打包编译的功能</h3>
+        </li>
+        <li>运行 npm i webpack-dev-server -D</li>
+        <li>
+          在package.json中的scripts配置
+          <p>"test": "echo \"Error: no test specified\" && exit 1"</p>
+          <p>
+            "dev": "webpack-dev-server --open --port 3000 --contentBase src
+            --hot"
+          </p>
+        </li>
+        <li></li>
+        <li>
+          注：webpack-dev-server
+          这个工具，如果想要正常运行，要求，在本地项目中，必须安装 webpack
+        </li>
+      </ul>
+    </div>
+    <div id="assist" class="content">
+      <ul>
+          <li><h3>辅助包的引入</h3></li>
+          <li>npm install jquery --save-dev  安装jquery</li>
+          <li>npm install bootstrap --save-dev 安装bootstrap</li>
+          <li>在main.js文件中import $ from 'jquery'和import 'bootstrap/dist/css/bootstrap.css'</li>
+          <li>注：看在package.json中有无此配置<p>"dependencies": {</br>
+                    "bootstrap": "^3.3.7",</br>
+                    "vue": "^2.5.2"</br>
+                  }</p></li>
+      </ul>
+    </div>
+    <div id="css-order" class="content">
+        <ul>
+            <li><h3>使用webpack打包css文件</h3></li>
+            <li>npm i style-loader css-loader --save-dev</li>
+            <li>修改`webpack.config.js`这个配置文件：
+                <p>
+                    module: { </br>
+                        rules: [ </br>
+                            { test: /\.css$/, use: ['style-loader', 'css-loader'] }</br>
+                        ]</br>
+                    }
+                </p>
+            </li>
+            <li><h3>使用webpack打包less sass文件</h3></li>
+            <li>npm i less-loader less -D  cnpm i sass-loader node-sass --save-dev</li>
+            <li>修改`webpack.config.js`这个配置文件:
+                <p>{ test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },</br>
+                    { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+                </p>
+            </li>
+            <li><h3>使用webpack处理css中的路径</h3></li>
+            <li>npm i url-loader file-loader --save-dev</li>
+            <li>修改`webpack.config.js`这个配置文件:
+                <p>
+                    { test: /\.(png|jpg|gif)$/, use: 'url-loader' }</br>
+                    可以通过`limit`指定进行base64编码的图片大小；只有小于指定字节（byte）的图片才会进行base64编码：</br>
+                    { test: /\.(png|jpg|gif)$/, use: 'url-loader?limit=43960' },
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div id="babel-order" class="content">
+        <ul>
+            <li><h3>使用babel处理高级JS语法</h3></li>
+            <li>npm i babel-core babel-loader babel-plugin-transform-runtime --save-dev</li>
+            <li>npm i babel-preset-env babel-preset-stage-0 --save-dev</li>
+            <li>
+                修改`webpack.config.js`这个配置文件:
+                <p>{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }</p>
+            </li>
+            <li>在项目根目录中添加`.babelrc`文件，并修改这个配置文件如下：
+                    <p>{</br>
+                        "presets":["es2015", "stage-0"],</br>
+                        "plugins":["transform-runtime"]</br>
+                    }</p></li>
+        </ul>
+    </div>
+    <div id="explanatory" class="warning">
+        <h3>直接导入成品webpack.config.js</h3>
+    </div>
+  </body>
+</html>
+
